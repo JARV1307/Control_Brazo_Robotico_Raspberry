@@ -1,1 +1,1 @@
-[FLUJOGRAMA_COMPLETO.pdf](https://github.com/user-attachments/files/18308652/FLUJOGRAMA_COMPLETO.pdf)
+sistema de comunicaciones serie RS-232 para el control de un brazo robótico de 5 grados
