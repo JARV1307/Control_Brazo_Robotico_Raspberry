@@ -27,13 +27,13 @@ int inicial_y;
 int inicial_z;
 int aux = 0;
 
-//Creacion de la variable donde se guardará el estado del robot en cada iteración
+//Creacion de la variable donde se guardarÃ¡ el estado del robot en cada iteraciÃ³n
 EstadoRobot estado;
 
-//Creación de la variable archivo para copiar la recepción
+//CreaciÃ³n de la variable archivo para copiar la recepciÃ³n
 FILE *archivo;
 
-// Declaración de las funciones utilizadas
+// DeclaraciÃ³n de las funciones utilizadas
 void recibir_datos(int fd, FILE *archivo);
 void guardarEstadoEnArchivo(FILE *archivo);
 void enviar_comando_robot(int fd, char comando);
@@ -68,10 +68,6 @@ int main()
     //Envio movimiento inicial
     enviar_comando_robot(fd, 'M');
     
-    // Guardar la posición inicial
-    // printf("%d\n",inicial_x);
-    // printf("%d\n",inicial_y);
-    // printf("%d\n",inicial_z);
       
     int opcion;
     
@@ -79,15 +75,15 @@ int main()
         opcion = mostrar_menu();
         switch (opcion) {
         	
-            case 1: { // Mover a posición escogida por el usuario
+            case 1: { // Mover a posiciÃ³n escogida por el usuario
                 int x, y, z;
-                printf("Introduce la posición objetivo (X Y Z): ");
+                printf("Introduce la posiciÃ³n objetivo (X Y Z): ");
                 scanf("%d %d %d", &x, &y, &z);
                 mover_a_posicion(fd, x, y, z);
                 break;
             }
             
-            case 2: // Giro de 180º de la muñeca, en sentido horario o antihorario dependiendo de la elección del usuario
+            case 2: // Giro de 180Âº de la muÃ±eca, en sentido horario o antihorario dependiendo de la elecciÃ³n del usuario
                 direccion = elegir_direccion_giro();
                 if (direccion == 'H') {
 		    		if(estado.angulo_muneca_b < 360){
@@ -109,7 +105,7 @@ int main()
                 abrir_y_cerrar_mano(fd);
                 break;
                 
-            case 4: // Volver a la posición inicial con el mismo orden de movimiento
+            case 4: // Volver a la posiciÃ³n inicial con el mismo orden de movimiento
                 volver_a_posicion_original(fd, inicial_x, inicial_y, inicial_z);
                 break;
                 
@@ -117,8 +113,8 @@ int main()
                 printf("Saliendo del programa...\n");
                 break;
                 
-            default: // Caso de opción no valida
-                printf("Opción no válida. Inténtalo de nuevo.\n");
+            default: // Caso de opciÃ³n no valida
+                printf("OpciÃ³n no vÃ¡lida. IntÃ©ntalo de nuevo.\n");
         }
     } while (opcion != 5);
 
@@ -128,21 +124,21 @@ int main()
     return 0;
 }
 
-// Menu de inicio de la aplicación
+// Menu de inicio de la aplicaciÃ³n
 int mostrar_menu() {
     int opcion;
-    printf("\n--- Menú de opciones ---\n");
-    printf("1. Mover a posición (X, Y, Z)\n");
-    printf("2. Girar muñeca 180º\n");
+    printf("\n--- MenÃº de opciones ---\n");
+    printf("1. Mover a posiciÃ³n (X, Y, Z)\n");
+    printf("2. Girar muÃ±eca 180Âº\n");
     printf("3. Abrir y cerrar pinzas\n");
-    printf("4. Volver a la posición inicial\n");
+    printf("4. Volver a la posiciÃ³n inicial\n");
     printf("5. Salir\n");
-    printf("Selecciona una opción: ");
+    printf("Selecciona una opciÃ³n: ");
     scanf("%d", &opcion);
     return opcion;
 }
 
- // Elección del sentido de giro si se escoge el giro de muñeca
+ // ElecciÃ³n del sentido de giro si se escoge el giro de muÃ±eca
 char elegir_direccion_giro() {
     char direccion;
     do {
@@ -150,13 +146,13 @@ char elegir_direccion_giro() {
         printf("H para horario, A para antihorario: ");
         scanf(" %c", &direccion);
         if (direccion != 'H' && direccion != 'A') {
-            printf("Opción no válida. Inténtalo de nuevo.\n");
+            printf("OpciÃ³n no vÃ¡lida. IntÃ©ntalo de nuevo.\n");
         }
     } while (direccion != 'H' && direccion != 'A');
     return direccion;
 }
 
- // Función para llevar a cabo la recepción de los datos
+ // FunciÃ³n para llevar a cabo la recepciÃ³n de los datos
 void recibir_datos(int fd, FILE *archivo)
 {	
 	char cadena [256];
@@ -198,12 +194,12 @@ void recibir_datos(int fd, FILE *archivo)
 	printf("Angulo Giro: %d\n", estado.angulo_giro);
 	printf("Angulo Brazo: %d\n", estado.angulo_brazo);
 	printf("Angulo Antebrazo: %d\n", estado.angulo_antebrazo);
-	printf("Angulo Muñeca A: %d\n", estado.angulo_muneca_a);
-	printf("Angulo Muñeca B: %d\n", estado.angulo_muneca_b);
+	printf("Angulo MuÃ±eca A: %d\n", estado.angulo_muneca_a);
+	printf("Angulo MuÃ±eca B: %d\n", estado.angulo_muneca_b);
 	printf("Distancia Pinza: %d\n", estado.distancia_pinza);
-	printf("Posición X: %d\n", estado.pos_x);
-	printf("Posición Y: %d\n", estado.pos_y);
-	printf("Posición Z: %d\n", estado.pos_z);
+	printf("PosiciÃ³n X: %d\n", estado.pos_x);
+	printf("PosiciÃ³n Y: %d\n", estado.pos_y);
+	printf("PosiciÃ³n Z: %d\n", estado.pos_z);
 	
 	// Guarda las posiciones iniciales del robot
 	if(aux == 0){
@@ -222,11 +218,11 @@ void recibir_datos(int fd, FILE *archivo)
 void guardarEstadoEnArchivo(FILE *archivo)
 {
 	if (archivo == NULL) {
-        perror("Error: archivo no válido");
+        perror("Error: archivo no vÃ¡lido");
         return;
     }
 
-    // Escribir los valores en una sola línea, separados por comas
+    // Escribir los valores en una sola lÃ­nea, separados por comas
     fprintf(archivo, "%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
             estado.angulo_giro,
             estado.angulo_brazo,
@@ -239,7 +235,7 @@ void guardarEstadoEnArchivo(FILE *archivo)
             estado.pos_z);
 }
 
-// Función para enviar un comando simple al robot
+// FunciÃ³n para enviar un comando simple al robot
 void enviar_comando_robot(int fd, char comando) {
     //char cmd[2] = {comando, '\0'};
     serial_send(fd, &comando, 1);
@@ -248,7 +244,7 @@ void enviar_comando_robot(int fd, char comando) {
 }
 
 
-// Mover el robot a una posición específica
+// Mover el robot a una posiciÃ³n especÃ­fica
 void mover_a_posicion(int fd, int objetivo_x, int objetivo_y, int objetivo_z) {
 	
 	//Movimiento en X
@@ -279,7 +275,7 @@ void mover_a_posicion(int fd, int objetivo_x, int objetivo_y, int objetivo_z) {
     }
 }
 
-// Girar la muñeca del robot
+// Girar la muÃ±eca del robot
 void girar_muneca(int fd, int angulo) {
     while (estado.angulo_muneca_b != angulo) {
         if (estado.angulo_muneca_b < angulo) {
@@ -302,7 +298,7 @@ void abrir_y_cerrar_mano(int fd) {
 	}
 }
 
-// Volver a la posición original
+// Volver a la posiciÃ³n original
 void volver_a_posicion_original(int fd, int objetivo_x, int objetivo_y, int objetivo_z) {
 	
 	//Movimiento en Z
